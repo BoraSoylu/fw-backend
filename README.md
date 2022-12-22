@@ -1,14 +1,15 @@
 # fw-backend
 ### TO-DO:
-1. Convert to async functions.
-2. Implement Winston.
-3. Implement Zod.
-4. Implement Ajv.
-5. Implement Helmet.
-6. Implement Prisma.
-7. Code create wallet.
-8. Code get wallet.
-9. Code create email reminder.
-10. Code get email reminders.(if exists)
-11. Code delete email reminders.
-12. Code email reminder service.
+1. Validate coin key names(coin1,2 etc.) with joi.
+2. Convert to async functions.
+3. Implement Winston.
+4. Implement Zod.
+5. Implement Ajv.
+6. Implement Helmet.
+7. Implement Prisma.
+8. Code create wallet.
+9. Code get wallet.
+10. Code create email reminder.
+11. Code get email reminders.(if exists)
+12. Code delete email reminders.
+13. Code email reminder service.

@@ -1,22 +1,16 @@
 import { Prisma, PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 
 export async function getWallet() {
   // ... you will write your Prisma Client queries here
 }
-export async function createWallet(createWallet: CreateWallet) {
-  const prisma = new PrismaClient();
-  const wallet = await prisma.wallet.create({
-    data
-  });
 
+export async function createWallet(createWallet: CreateWallet) {
+  const wallet = await prisma.wallet.create({
+    data: createWallet,
+  });
   return wallet;
 }
-// export async function createWallet(createWallet: CreateWallet) {
-//   const wallet = await prisma.wallet.create({
-//     data: createWallet,
-//   });
-//   return wallet;
-// }
 
 export async function getWalletsFromEmail() {
   // ... you will write your Prisma Client queries here

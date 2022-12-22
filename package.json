@@ -19,6 +19,9 @@
     "url": "https://github.com/BoraSoylu/fw-backend/issues"
   },
   "homepage": "https://github.com/BoraSoylu/fw-backend#readme",
+  "prisma": {
+    "seed": "ts-node prisma/seed"
+  },
   "dependencies": {
     "@prisma/client": "^4.8.0",
     "@types/nodemailer": "^6.4.7",
@@ -26,6 +29,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.0.1",
+    "joi": "^17.7.0",
     "nanoid": "^3.3.4",
     "nodemailer": "^6.8.0",
     "zod": "^3.20.2"

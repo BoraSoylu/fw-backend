@@ -1,9 +1,13 @@
+import { PrismaClient, Prisma } from '@prisma/client';
 import express, { Express, Request, Response, Router } from 'express';
-import { createWallet } from './dbAccess';
-import { incomingWalletSchema } from './validation.zod';
+// import { createWallet } from './dbAccess';
+import { incomingWalletSchema } from './validation.joi';
 import { generateAddress } from './walletAddressGenerator';
+
 const app: Express = express();
 export const router: Router = Router();
+
+const prisma = new PrismaClient();
 
 router.use((req, res, next) => {
   console.log('---------------');
@@ -24,19 +28,20 @@ router.get('/wallet', (req: Request, res: Response) => {
   res.send(`hit get wallet - req.query: ${req.query}`);
 });
 
-router.post('/wallet', (req: Request, res: Response) => {
-  try {
-    const incomingWallet = incomingWalletSchema.parse(req.body);
-    createWallet({
-      address: generateAddress(),
-      contents: incomingWallet.contents,
-      title: incomingWallet.title,
-      note: incomingWallet.note,
-    }).then((test) => {
-      res.send(test);
-    });
-  } catch (error) {
+router.post('/wallet', async (req: Request, res: Response) => {
+  const { error, value } = await incomingWalletSchema.validate(req.body);
+  if (error) {
     res.send(error);
+  } else {
+    const wallet: CreateWallet = {
+      address: generateAddress(),
+      contents: value.contents,
+      title: value.title,
+      note: value.note,
+    };
+    prisma.wallet.create({ data: wallet }).then((data) => {
+      res.send(wallet);
+    });
   }
 });
 
