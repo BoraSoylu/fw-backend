@@ -1,22 +1,37 @@
 import express, { Express, Request, Response, Router } from 'express';
+import { incomingWalletSchema } from './validation.zod';
 
 const app: Express = express();
 export const router: Router = Router();
 
 router.use((req, res, next) => {
-  console.log('Time: ', Date.now());
+  console.log('---------------');
+  console.log('---------------');
+  console.log('---------------');
+  console.log('---------------');
+  console.log('---------------');
+  console.log('---------------');
+  console.log('---------------');
+  console.log('---------------');
+  console.log('---------------');
   next();
 });
 
 router.get('/wallet', (req: Request, res: Response) => {
   console.log(`hit get wallet - req.query: ${req.query}`);
   console.log(req.query);
-  res.send(`hit get wallet - req.query: ${req.query}`)
+  res.send(`hit get wallet - req.query: ${req.query}`);
 });
 
 router.post('/wallet', (req: Request, res: Response) => {
-  console.log(`hit create wallet - req.body: ${JSON.stringify(req.body)}`);
-  res.send(req.body);
+  try {
+    const incomingWallet = incomingWalletSchema.parse(req.body);
+    console.log(incomingWallet);
+    res.send(incomingWallet);
+
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 router.get('/email', (req: Request, res: Response) => {
