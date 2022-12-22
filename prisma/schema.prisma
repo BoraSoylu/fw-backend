@@ -14,7 +14,7 @@ generator client {
 model Wallet {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  address   String   @unique @db.Char(11)
+  address   String   @unique @db.Char(10)
   contents  Json
   title     String?
   note      String?

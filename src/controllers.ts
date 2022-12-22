@@ -1,8 +1,13 @@
-import { PrismaClient, Prisma } from '@prisma/client';
-import express, { Express, Request, Response, Router } from 'express';
-// import { createWallet } from './dbAccess';
+import { PrismaClient } from '@prisma/client';
+import express, {
+  Express,
+  NextFunction,
+  Request,
+  Response,
+  Router,
+} from 'express';
 import { incomingWalletSchema } from './validation.joi';
-import { generateAddress } from './walletAddressGenerator';
+import { generateAddress } from './AddressGenerator';
 
 const app: Express = express();
 export const router: Router = Router();
@@ -22,28 +27,52 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get('/wallet', (req: Request, res: Response) => {
-  console.log(`hit get wallet - req.query: ${req.query}`);
-  console.log(req.query);
-  res.send(`hit get wallet - req.query: ${req.query}`);
+router.get('/wallet', async (req: Request, res: Response) => {
+  const incomingAddress = req.query.address;
+  try {
+    if (typeof incomingAddress !== 'string') {
+      throw new Error('Wrong params');
+    }
+    if (!/^[123456789ABCDEFGHJKLMNPRSTUVWXYZ]{10}$/.test(incomingAddress)) {
+      throw new Error('Wrong address format');
+    }
+    const wallet = await prisma.wallet.findFirst({
+      where: {
+        address: incomingAddress,
+      },
+    });
+    if (wallet === null) {
+      throw new Error('Wallet does not exist');
+    }
+    res.send(JSON.stringify(wallet));
+  } catch (error) {
+    res.send(error);
+  }
 });
 
-router.post('/wallet', async (req: Request, res: Response) => {
-  const { error, value } = await incomingWalletSchema.validate(req.body);
-  if (error) {
-    res.send(error);
-  } else {
+router.post(
+  '/wallet',
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { error, value } = await incomingWalletSchema.validate(req.body);
+    if (error) {
+      res.send(error);
+      next();
+    }
+
     const wallet: CreateWallet = {
       address: generateAddress(),
       contents: value.contents,
-      title: value.title,
-      note: value.note,
+      title: value.title ? value.title : null,
+      note: value.note ? value.note : null,
     };
+    console.log(wallet);
+    res.send(wallet);
+
     prisma.wallet.create({ data: wallet }).then((data) => {
       res.send(wallet);
     });
   }
-});
+);
 
 router.get('/email', (req: Request, res: Response) => {
   console.log('Hit router.get');

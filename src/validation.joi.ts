@@ -1,11 +1,11 @@
 import Joi from 'joi';
 
 export const incomingWalletSchema = Joi.object({
-  title: Joi.string().max(100).required(),
-  note: Joi.string().max(500).required(),
+  title: Joi.string().max(100).optional(),
+  note: Joi.string().max(500).optional(),
   contents: Joi.object()
     .pattern(
-      Joi.string(),
+      Joi.string().regex(/^coin_[0-9]$/),
       Joi.object({
         id: Joi.string().required(),
         symbol: Joi.string().required(),
