@@ -20,11 +20,13 @@
   },
   "homepage": "https://github.com/BoraSoylu/fw-backend#readme",
   "dependencies": {
+    "@prisma/client": "^4.8.0",
     "@types/nodemailer": "^6.4.7",
     "ajv": "^8.11.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "helmet": "^6.0.1",
+    "nanoid": "^3.3.4",
     "nodemailer": "^6.8.0",
     "zod": "^3.20.2"
   },

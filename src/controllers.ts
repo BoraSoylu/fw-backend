@@ -1,6 +1,7 @@
 import express, { Express, Request, Response, Router } from 'express';
+import { createWallet } from './dbAccess';
 import { incomingWalletSchema } from './validation.zod';
-
+import { generateAddress } from './walletAddressGenerator';
 const app: Express = express();
 export const router: Router = Router();
 
@@ -26,9 +27,14 @@ router.get('/wallet', (req: Request, res: Response) => {
 router.post('/wallet', (req: Request, res: Response) => {
   try {
     const incomingWallet = incomingWalletSchema.parse(req.body);
-    console.log(incomingWallet);
-    res.send(incomingWallet);
-
+    createWallet({
+      address: generateAddress(),
+      contents: incomingWallet.contents,
+      title: incomingWallet.title,
+      note: incomingWallet.note,
+    }).then((test) => {
+      res.send(test);
+    });
   } catch (error) {
     res.send(error);
   }
