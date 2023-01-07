@@ -1,4 +1,4 @@
-type CreateWallet = {
+export type CreateWallet = {
   address: string;
   contents: {
     symbol: string;

@@ -4,10 +4,11 @@ import express, {
   NextFunction,
   Request,
   Response,
-  Router,
+  Router
 } from 'express';
 import { incomingWalletSchema } from './validation.joi';
 import { generateAddress } from './AddressGenerator';
+import { CreateWallet } from './types';
 
 const app: Express = express();
 export const router: Router = Router();
@@ -27,8 +28,11 @@ router.use((req, res, next) => {
   next();
 });
 
+
+//Get wallet with address
 router.get('/wallet', async (req: Request, res: Response) => {
   const incomingAddress = req.query.address;
+
   try {
     if (typeof incomingAddress !== 'string') {
       throw new Error('Wrong params');
@@ -40,15 +44,24 @@ router.get('/wallet', async (req: Request, res: Response) => {
       where: {
         address: incomingAddress,
       },
+      select: {
+        address: true,
+        title: true,
+        note: true,
+        createdAt: true,
+        contents: true,
+      },
     });
     if (wallet === null) {
-      throw new Error('Wallet does not exist');
+      console.log(wallet);
+      res.status(404).send('Wallet not found');
     }
-    res.send(JSON.stringify(wallet));
+    res.send(wallet);
   } catch (error) {
     res.send(error);
   }
 });
+
 
 router.post(
   '/wallet',

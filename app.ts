@@ -1,15 +1,16 @@
-console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+console.log('XXXXXXXX APP RESTARTED XXXXXXXX');
+console.log('XXXXXXXX APP RESTARTED XXXXXXXX');
+console.log('XXXXXXXX APP RESTARTED XXXXXXXX');
+console.log('XXXXXXXX APP RESTARTED XXXXXXXX');
+console.log('XXXXXXXX APP RESTARTED XXXXXXXX');
+console.log('XXXXXXXX APP RESTARTED XXXXXXXX');
+console.log('XXXXXXXX APP RESTARTED XXXXXXXX');
+console.log('XXXXXXXX APP RESTARTED XXXXXXXX');
+console.log('XXXXXXXX APP RESTARTED XXXXXXXX');
 import express, { Express, Request, Response } from 'express';
 import { router } from './src/controllers';
 import helmet from 'helmet';
+
 const app: Express = express();
 
 app.use(express.json());
