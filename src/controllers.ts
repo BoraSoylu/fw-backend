@@ -9,15 +9,7 @@ export const router: Router = Router();
 const prisma = new PrismaClient();
 
 router.use((req, res, next) => {
-    console.log('---------------');
-    console.log('---------------');
-    console.log('---------------');
-    console.log('---------------');
-    console.log('NEW REQUEST');
-    console.log('---------------');
-    console.log('---------------');
-    console.log('---------------');
-    console.log('---------------');
+    console.log('----------- NEW REQUEST -----------');
     next();
 });
 
