@@ -67,6 +67,7 @@ router.get('/wallet', async (req: Request, res: Response, next: NextFunction) =>
 //TODO - Add comments
 router.post('/wallet', async (req: Request, res: Response, next: NextFunction) => {
     const { error, value } = await incomingWalletSchema.validate(req.body);
+    console.log(`post request: ${value}`)
     try {
         if (error) {
             res.status(422);
