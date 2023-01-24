@@ -3,7 +3,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 import { incomingWalletSchema } from './validation.joi';
 import { generateAddress } from './AddressGenerator';
 import { CreateWallet } from './types';
-
+import type { Currency as CurrencyType } from '.prisma/client';
 export const router: Router = Router();
 
 const prisma = new PrismaClient();
@@ -67,11 +67,12 @@ router.get('/wallet', async (req: Request, res: Response, next: NextFunction) =>
 //TODO - Add comments
 router.post('/wallet', async (req: Request, res: Response, next: NextFunction) => {
     const { error, value } = await incomingWalletSchema.validate(req.body);
-    console.log(`post request: ${value}`)
+    console.log(`post request: ${value}`);
     try {
         if (error) {
             res.status(422);
-            throw new Error('Wrong request body type!');
+
+            throw new Error(error.message);
         }
 
         const wallet: CreateWallet = {
@@ -79,11 +80,14 @@ router.post('/wallet', async (req: Request, res: Response, next: NextFunction) =
             contents: value.contents,
             title: value.title ? value.title : null,
             note: value.note ? value.note : null,
+            currency: value.currency,
         };
         await prisma.wallet.create({ data: wallet });
         res.send(wallet);
     } catch (error: unknown) {
         if (error instanceof Error) {
+            console.log('error here');
+            res.status(520);
             res.send({ message: error.message });
         } else {
             res.status(520).send(error);
