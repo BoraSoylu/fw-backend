@@ -41,6 +41,7 @@ router.get('/wallet', async (req: Request, res: Response, next: NextFunction) =>
                 note: true,
                 createdAt: true,
                 contents: true,
+                currency: true,
             },
         });
 
