@@ -1,6 +1,7 @@
 # Farazy Wallet Backend
 
 This project is currently under development.
+
 The main purpose for this project is to advance my personal software engineering skills. 
 
 Welcome to the Farazy Wallet Backend repository! This repository contains the backend code for the Farazy Wallet app, which allows users to simulate how their cryptocurrency portfolio would have performed if they had invested in different cryptocurrencies at a particular time. With Farazy Wallet, users can create a fake crypto wallet and add any amount of their desired cryptocurrencies to the wallet. They can then view their wallet at any time by saving the URL. The app is anonymous and straightforward, and users don't need to log in to access their wallet.
@@ -10,7 +11,7 @@ This repository contains the code for the backend portion of the app. If you're 
 ## Hosting with Planetscale and Railway
 
 The FarazyWallet database is hosted on [PlanetScale](https://www.planetscale.com/), while the backend server is hosted on [Railway](https://railway.app/). The domain farazywallet.com has been purchased and added to DNS. 
-Heres and example https://www.farazywallet.com/api/v1/wallet?address=VL1JVE4EMS
+The backend is currently live: https://www.farazywallet.com/api/v1/wallet?address=VL1JVE4EMS
 
 ## Coingecko API
 
@@ -19,7 +20,7 @@ To retrieve cryptocurrency data, Farazy Wallet uses the Coingecko API. Coingecko
 For more information on the Coingecko API, please refer to the [official documentation](https://www.coingecko.com/en/api/documentation).
 
 
-Farazy Wallet is built using the following technologies:
+## Farazy Wallet is built using the following technologies
 
 - **TypeScript**: A typed superset of JavaScript that provides better type checking and developer experience. With TypeScript, developers can catch errors before runtime, which makes the development process more efficient.
 
@@ -40,9 +41,8 @@ Farazy Wallet is built using the following technologies:
 - **Helmet**: A collection of middleware functions for Express.js that help secure our application by setting various HTTP headers. Helmet is used to help protect against common web application vulnerabilities.
 
 
-## Learning Topics
+## Through working on this project, I am learning the following topics
 
-Through working on this project, I am learning the following topics:
 
 ### API Design
 
@@ -64,3 +64,6 @@ Hosting software on the cloud involves deploying our application to a cloud serv
 
 Rate limiting involves limiting the rate at which clients can make requests to our application. This can help prevent abuse and ensure that the application remains performant.
 
+## What does Farazy mean?
+
+Farazi means imaginary in Turkish and since this is a project about imaginary crypto wallets I thought it would be fitting to use a "tech version" of the original word. 
